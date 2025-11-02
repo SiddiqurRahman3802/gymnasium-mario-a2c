@@ -1,0 +1,18 @@
+{
+  "value": 782.7,
+  "params": {
+    "n_envs": 8,
+    "n_steps": 256,
+    "gamma": 0.999,
+    "gae_lambda": 0.97,
+    "ent_coef": 0.0013293771991636353,
+    "vf_coef": 0.3454599737656805,
+    "max_grad_norm": 1.0,
+    "learning_rate": 7.309539835912905e-05,
+    "frame_skip": 4,
+    "use_lr_decay": true,
+    "features_dim": 512,
+    "pi_hidden": 256,
+    "vf_hidden": 768
+  }
+}

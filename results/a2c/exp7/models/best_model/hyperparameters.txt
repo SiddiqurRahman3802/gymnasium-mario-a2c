@@ -1,0 +1,74 @@
+# Experiment
+algorithm = A2C
+total_timesteps = 50_000
+tensorboard_log = {exp_dir}/logs/tensorboard
+checkpoint.save_freq = 25000
+eval.eval_freq = 25000
+eval.n_eval_episodes = 5
+eval.deterministic = False
+seed.train = 0
+seed.eval  = 1
+n_envs.train = 8
+n_envs.eval  = 1
+
+# Which profile is active at TRAIN time (ignored by evaluate script)
+active_profile = single   ; (script reads both [single] and [multi] anyway)
+
+# Environment profiles
+[single]
+description = Train only on 1-1
+env_id.train = SuperMarioBros-1-1-v0
+env_id.eval  = SuperMarioBros-1-1-v0
+
+[multi]
+description = Train on RandomStages (all 32 levels, random order)
+env_id.train = SuperMarioBrosRandomStages-v0   ; contains "RandomStages"
+env_id.eval  = SuperMarioBrosRandomStages-v0   ; contains "RandomStages"
+
+# Wrapper / preprocessing
+frame_skip = 4
+screen_size = 84
+frame_stack = 4
+max_episode_steps.eval = 9_999_999
+action_space = SIMPLE_MOVEMENT
+
+# VecNormalize
+vecnormalize.enabled = True
+vecnormalize.training = True
+vecnormalize.norm_obs = False
+vecnormalize.norm_reward = True
+vecnormalize.clip_obs = 10.0
+vecnormalize.clip_reward = 10.0
+vecnormalize.gamma = 0.99
+vecnormalize.saved_path = {exp_dir}/models/vecnormalize.pkl
+vecnormalize.eval_mode.training = False
+vecnormalize.eval_mode.norm_reward = True
+
+# Policy / Network
+policy = CnnPolicy
+features_extractor = NatureCNN
+features_extractor.features_dim = 512
+features_extractor.normalized_image = False
+net_arch.pi = [256, 256]
+net_arch.vf = [768, 768]
+
+# A2C Hyperparameters
+n_steps = 256
+learning_rate.base = 7.31e-5
+learning_rate.schedule = base_lr * max(0.1, progress_remaining)
+gamma = 0.999
+gae_lambda = 0.97
+ent_coef = 0.00133
+vf_coef = 0.345
+max_grad_norm = 1.0
+use_rms_prop = True
+normalize_advantage = True
+
+# Logging / Videos
+log_dir = {exp_dir}/logs
+video_dir = {exp_dir}/videos
+test.render_mode = rgb_array
+
+# Notes:
+# - At evaluation, the script loads BOTH [single] and [multi] and runs them back-to-back.
+# - If your saved model was trained on v0 ids, keep v0 in evaluation to avoid space mismatches.
