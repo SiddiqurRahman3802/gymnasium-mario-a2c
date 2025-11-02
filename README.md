@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/tooichitake/gymnasium-mario?style=social)](https://github.com/tooichitake/gymnasium-mario/stargazers)
 
-> 🚀 **Train AI agents to play Super Mario Bros using deep reinforcement learning with PPO**
+> 🚀 **Train AI agents to play Super Mario Bros using deep reinforcement learning with A2C**
 
 ## 🎬 Trained Agent Demo
 
@@ -39,7 +39,7 @@ https://github.com/user-attachments/assets/06de1fdb-ad08-413f-8118-d5286a815a6c
 
 ```bash
 # Clone the repository
-git clone https://github.com/tooichitake/gymnasium-mario.git
+git clone https://github.com/SiddiqurRahman3802/gymnasium-mario-a2c.git
 cd gymnasium-mario
 
 # Create conda environment
